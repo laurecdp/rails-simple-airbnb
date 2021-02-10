@@ -1,14 +1,30 @@
 <h1>  All our Flats(<%=@flats.count%>)</h1>
 
+<div class="container"> 
+  <div class="row">
 
-<% @flats.each do |flat| %>
- <div>
-    <h2><%= flat.name %></h2>
-    <p> <%= flat.address %> 
-     <%= flat.description %>
-     <%= flat.number_of_guests %> <i class="fas fa-users"></i> </p>
-  </div>
-  <h6 class="card-trip-pricing"><%=flat.price_per_night %>€</h6>
-  <% end %>
+    <% @flats.each do |flat| %>
+      <div class="card" style="width: 18rem;">
+        <img src="https://picsum.photos/200/100/?random=<%=rand(10)%>" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title"> <%= flat.name %> </h5>
+          
+          <ul class="list-group list-group-flush">
+          <li class="list-group-item"> <%= flat.description %> </li>
+          <li class="list-group-item"> <%= flat.number_of_guests %> <i class="fa fa-users"> </i></li>
+          <li class="list-group-item"> <%=flat.price_per_night %> <i class="fa fa-euro"> </i> </li>
+          </ul>
+
+          <div class="card-footer">
+            <%= link_to "Remove",
+                    flat_path(flat),
+                    method: :delete,
+                    data: { confirm: "Are you sure?" } %>
+              <%= link_to "Edit", flat_path(flat) %>
+              <%= link_to "More info", flat_path(flat) %>
+          </div>
+        </div>
+      </div>
+      <% end %>
   </div>
 </div>
